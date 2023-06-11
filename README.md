@@ -101,3 +101,5 @@ The export JSON format in presented below:
                 "anti_stereotyped_version": "male"
             },
 ```
+
+![Dataset Sentence Counts](documents/dataset_sentence_counts.png "Total counts of the sentences in the dataset")
