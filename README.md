@@ -35,7 +35,7 @@ This step turns the csv template sentence output from previous step into stereot
 python3 _3_csv2pairs_rule.py --source_path ./custom_biases/gen_csv --bias_spec_json ./custom_biases/custom_biases_spec.json --out_path ./custom_biases/gen_pairs_csv
 ```
 
-#### Step 4: Test Social Bias on given **Tested Model** using Stereotype Score metric from [Nadeem'20](https://arxiv.org/abs/2004.09456)(the framework currently uses this metric, but can support various metrics from [Delobelle'22](https://repository.uantwerpen.be/docman/irua/8868d3/192219.pdf))
+#### Step 4: Test Social Bias on given **Tested Model** using Stereotype Score metric from [Nadeem'20](https://arxiv.org/abs/2004.09456) (the framework currently uses this metric, but can support various metrics from [Delobelle'22](https://repository.uantwerpen.be/docman/irua/8868d3/192219.pdf))
 The tested model accepts paths from HuggingFace Transformer library, examples: *"bert-base-uncased", "bert-large-uncased", "gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"*. We note that the bias tests on individual generations can be misleading, therefore we suggest an additional bootstrapping step described later.
 ```
 python3 _4_ss_test_rule.py --gen_pairs_path ./tmp/pairs --tested_model 'bert-base-uncased' --out_path ./tmp/ss_test
