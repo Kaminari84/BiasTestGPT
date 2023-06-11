@@ -1,5 +1,5 @@
 # BiasTestGPT
-Repository for BiasTestGPT - Using ChatGPT for Social Bias Testing of Language Models (Link TBA)
+#### Using ChatGPT for Social Bias Testing of Pretrained Language Models
 
 The repository contains the BiasTestGPT framework which uses ChatGPT controllable sentence generation for creating dynamic datasets for testing social biases on open-sourced Pretrained Language Models (PLMs). 
 
