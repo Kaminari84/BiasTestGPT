@@ -16,7 +16,7 @@ The following repository contains the BiasTestGPT framework which uses ChatGPT c
 ## BiasTestGPT Generation Framework Steps
 We describe the steps followed by the framework. One of the reasons for splitting the generaion into multile steps with separate scripts is to allow for easy inspection of generated sentences as well as for supporting modeular architecture where some steps can be improved with further techniques (e.g., a better approach of turning sentences into templates).
 
-#### Step 1: Generating Test Sentences Using Provided Bias Specifciation
+#### Step 1: Generating Test Sentences Using Provided Bias Specification
 Generation of test sentences using a generator PLM. The framework accepts OpenAI models such as "gpt-3.5-turbo" or "gpt-4". If OpenAI model is used <OPENAI-TOKEN> needs to be provided as input argument by the user. Th genration script also support any generative PLMs hosted on HuggingFace, such as: "gpt-j-6b" or "gpt-neo-2.7B". Generation requires a bias specification in JSON format on input, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification.
 
 ```
