@@ -99,7 +99,7 @@ def checkBias(row, biasProbFunc, model, tokenizer, device):
   labels = [row['label_1'], row['label_2']]
   template = row['template']
   if "[MASK]" not in template:
-    template  = template.replace("[T]","[MASK]")
+    template = template.replace("[T]","[MASK]")
   if "[MASK]" not in template:
     print(f"ERROR: [MASK] not in template: {template}")
 

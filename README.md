@@ -25,7 +25,7 @@ python3 _1_gen_test_sentences.py --bias_spec_json ./custom_biases/custom_biases_
 #### Step 2: Turn JSON generations into CSV for potential inspection of generated sentences
 Starting from generations in JSON format (see example in **/core_biases/gen_json/**), this step generates a CSV version of the generated sentences along with additional columns for potential human annotation - *`Discarded'* and *`Reason for discard'*. The script will process all .json files in a given directory.
 ```
- python3 _2_gen2csv.py --source_path ./custom_biases/gen_json --out_path ./custom_biases/gen_csv 
+python3 _2_gen2csv.py --source_path ./custom_biases/gen_json --out_path ./custom_biases/gen_csv 
 ```
 
 #### Step 3: Turn CSV templates into stereotype/anti-stereotype pairs
@@ -37,7 +37,7 @@ python3 _3_csv2pairs_rule.py --source_path ./custom_biases/gen_csv --bias_spec_j
 #### Step 4: Test Social Bias on given **Tested Model** using Stereotype Score metric from [Nadeem'20](https://arxiv.org/abs/2004.09456) (the framework currently uses this metric, but can support various metrics from [Delobelle'22](https://repository.uantwerpen.be/docman/irua/8868d3/192219.pdf))
 The tested model accepts paths from HuggingFace Transformer library, examples: *"bert-base-uncased", "bert-large-uncased", "gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"*. We note that the bias tests on individual generations can be misleading, therefore we suggest an additional bootstrapping step described later.
 ```
-python3 _4_ss_test_rule.py --gen_pairs_path ./tmp/pairs --tested_model 'bert-base-uncased' --out_path ./tmp/ss_test
+python3 _4_ss_test_rule.py --gen_pairs_path ./custom_biases/gen_pairs_csv --tested_model 'bert-base-uncased' --out_path ./custom_biases/gen_ss_test
 ```
 
 #### Step 5: Bootstrapping of Bias Test Results for Statistical Testing
