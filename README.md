@@ -8,13 +8,15 @@ The following repository contains the BiasTestGPT framework which uses ChatGPT c
 * [HuggingFace BiasTestGPT tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) - implementing the framework with Graphical User Interface. We encourage the use of the tool to test the framework in a user-centered way. We ara constantly adding new functionalities to this tool.
 * [Live Test Sentence Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_sentences) - this dataset contains test sentences from this repository (used to perform evaluation for the paper) as novel test sentences. The repository is linked to the **HuggingFace tool** and constantly grows based on user interactions. When user enteres new bias specification to test, the generated controlled test sentences are stored in this dataset.
 * [Live Bias Specification Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_biases) - this dataset contains bias specification for *`core_biases`* and *`custom_biases`* from this repository, but it also constantly grows with new custom bias specification being added based on user interactions with the **HuggingFace tool**.
+* [Datasheet for Datasets](https://github.com/Kaminari84/BiasTestGPT/blob/main/documents/BiasTestGPT___Datasheet_for_dataset_template.pdf) - this a description of the dataset collection process, preprocessing steps, intended uses as well as maintenance plan as suggested by [Gebru'21](https://arxiv.org/pdf/1803.09010.pdf).
 
 
 ## BiasTestGPT Generation Framework Steps
 We describe the steps followed by the framework. One of the reasons for splitting the generaion into multile steps with separate scripts is to allow for easy inspection of generated sentences as well as for supporting modeular architecture where some steps can be improved with further techniques (e.g., a better approach of turning sentences into templates).
 
 #### Step 1: Generating Test Sentences Using Provided Bias Specifciation
-Generation of test sentences requires a bias specification in JSON format on inout, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification. <OPENAI-TOKEN> needs to be provided by the user.
+Generation of test sentences using a generator PLM. The framework accepts OpenAI models such as "gpt-3.5-turbo" or "gpt-4". If OpenAI model is used <OPENAI-TOKEN> needs to be provided as input argument by the user. Th genration script also support any generative PLMs hosted on HuggingFace, such as: "gpt-j-6b" or "gpt-neo-2.7B". Generation requires a bias specification in JSON format on input, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification.
+
 ```
 python3 _1_gen_test_sentences.py --bias_spec_json ./custom_biases/custom_biases_spec.json --generator_model 'gpt-3.5-turbo' --out_path './custom_biases/gen_json' --openai_token <OPENAI-TOKEN>
 ```
