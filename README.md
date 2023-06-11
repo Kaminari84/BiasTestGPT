@@ -1,10 +1,9 @@
 # BiasTestGPT
 Repository for BiasTestGPT - Using ChatGPT for Social Bias Testing of Language Models (Link TBA)
 
-The following repository contains the BiasTestGPT framework which uses ChatGPT controllable sentence generation for creating dynamic datasets for testing social biases in Pretrained Language Models (PLMs). It includes the 1) test ssentence generation script which can leverage any generators PLM, in particular ChatGPT as long as OpenAI key is provided. It also also contains scripts for all the processing steps from generation to bias testing. These steps, after generation, include 2) conversion of json generations into easily inspectable csv format, 3) turning generated sentences in test sentence templates with controlled social group placeholder, and 4) bias estimates per sentence, per tested attribute and per model using Stereotype Score (% of stereptyped choices in stereotype/anti-stereotype sentence pairs) metric from [Nadeem'20](https://arxiv.org/abs/2004.09456) (stereotype/anti-stereotype pairs).
+The repository contains the BiasTestGPT framework which uses ChatGPT controllable sentence generation for creating dynamic datasets for testing social biases on open-sourced Pretrained Language Models (PLMs). 
 
 ![BiasTestGPT Framework and Properties of the Generated Dataset](documents/main_architecture_props.png "BiasTestGPT Framework and Properties of the Generated Dataset")
-
 
 ## Links to Important Resources
 * [HuggingFace BiasTestGPT tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) - Interactive end-user bias testing tool build on top of BiasTestGPT framework. The tool leveraged pregenerated dataset and also supports specification of new biases and automated generation of novel test sentences. We encourage the use of the tool to test the framework in a user-friendly way. We are constantly adding new functionalities to this tool and improving its usability.
