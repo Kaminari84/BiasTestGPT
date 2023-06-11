@@ -6,7 +6,7 @@ The following repository contains the BiasTestGPT framework which uses ChatGPT c
 
 ## Links to Important Resources
 * [HuggingFace BiasTestGPT tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) - implementing the framework with Graphical User Interface. We encourage the use of the tool to test the framework in a user-centered way. We ara constantly adding new functionalities to this tool.
-* [Live Test Sentence Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_sentences) - this dataset contains test sentences from this repository (used to perform evaluation for the paper) as novel test sentences. THe repository is linked to the **HuggingFace tool** and constantly grows based on user interactions. When user enteres new bias specification to test, the generated controlled test sentences are stored in this dataset.
+* [Live Test Sentence Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_sentences) - this dataset contains test sentences from this repository (used to perform evaluation for the paper) as novel test sentences. The repository is linked to the **HuggingFace tool** and constantly grows based on user interactions. When user enteres new bias specification to test, the generated controlled test sentences are stored in this dataset.
 * [Live Bias Specification Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_biases) - this dataset contains bias specification for *`core_biases`* and *`custom_biases`* from this repository, but it also constantly grows with new custom bias specification being added based on user interactions with the **HuggingFace tool**.
 
 
