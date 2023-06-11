@@ -12,7 +12,7 @@ Here we describe the steprs followed by the framework. One of the reasons for sp
 Generation of test sentences requires a bias specification in JSON format on inout, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification. <OPENAI-TOKEN> needs to be provided by the user.
 ```
 python3 _1_gen_test_sentences.py --bias_spec_json ./custom_biases/custom_biases_spec.json --generator_model 'gpt-3.5-turbo' --out_path './custom_biases/gen_json' --openai_token <OPENAI-TOKEN>
-'''
+```
 
 #### Step 2: Turn JSON generations into CSV for potential inspection of generated sentences
 Starting from generations in JSON format (see example in **/core_biases/gen_json/**), this step generates a CSV version of the generated sentences along with additional columns for potential human annotation - *`Discarded'* and *`Reason for discard'*. The script will process all .json files in a given directory.
