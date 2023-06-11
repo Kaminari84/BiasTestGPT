@@ -36,13 +36,13 @@ python3 _3_csv2pairs_rule.py --source_path ./custom_biases/gen_csv --bias_spec_j
 ```
 
 #### Step 4: Test Social Bias on given **Tested Model** using Stereotype Score metric from [Nadeem'20](https://arxiv.org/abs/2004.09456)(the framework currently uses this metric, but can support various metrics from [Delobelle'22](https://repository.uantwerpen.be/docman/irua/8868d3/192219.pdf))
-The tested model accepts paths from HuggingFace Transformer library, examples: *"bert-base-uncased", "bert-large-uncased", "gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"*
+The tested model accepts paths from HuggingFace Transformer library, examples: *"bert-base-uncased", "bert-large-uncased", "gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"*. We note that the bias tests on individual generations can be misleading, therefore we suggest an additional bootstrapping step described later.
 ```
 python3 _4_ss_test_rule.py --gen_pairs_path ./tmp/pairs --tested_model 'bert-base-uncased' --out_path ./tmp/ss_test
 ```
 
 #### Step 5: Bootstrapping of Bias Test Results for Statistical Testing
-We provide a Jupyter Notebook script that takes the bias test results from Step 4 and performs 30x bootstrapping of data subsets selected to include 4 sentences per attribute. This is don to estimate the standard deviation of the bias score and perform statistical significance testing in comparison to manual templates. The script reproduces the main results from the paper.
+We provide a Jupyter Notebook script that takes the bias test results from Step 4 and performs 30x bootstrapping of data subsets. Each subset contains exactly 4 randomly selected sentences per each attribute in bias specification. This is don to estimate the standard deviation of the bias score and perform statistical significance testing in comparison to manual templates. The script reproduces the main results from the paper.
 
 
 ## File Descriptions
