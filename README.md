@@ -102,4 +102,8 @@ The export JSON format in presented below:
             },
 ```
 
+
+## Dataset Composition
+Overview of the test sentence counts for different bias attributes, this includes only sentences with type column set to *'paper'*. Sentences of another type can be dynamically added to the dataset via [BiasTestGPT HuggingFace Tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) and hence their counts will change.
+
 ![Dataset Sentence Counts](documents/dataset_sentence_counts.png "Total counts of the sentences in the dataset")
