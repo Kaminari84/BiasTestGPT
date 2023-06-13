@@ -41,7 +41,7 @@ python3 _4_ss_test_rule.py --gen_pairs_path ./custom_biases/gen_pairs_csv --test
 ```
 
 #### Step 5: Bootstrapping of Bias Test Results for Statistical Testing
-We provide a Jupyter Notebook script that takes the bias test results from Step 4 and performs 30x bootstrapping of data subsets. Each subset contains exactly 4 randomly selected sentences per each attribute in bias specification. This is don to estimate the standard deviation of the bias score and perform statistical significance testing in comparison to manual templates. The script reproduces the main results from the paper.
+We provide a Jupyter Notebook script - *``bootstrapping_bias_test.ipynb''* -  that takes the bias test results from Step 4 and performs 30x bootstrapping of data subsets. Each subset contains exactly 4 randomly selected sentences per each attribute in bias specification. This is done to estimate the standard deviation of the bias score and perform statistical significance testing in comparison to manual templates. The script reproduces the main results from the paper.
 
 
 ## File Descriptions
