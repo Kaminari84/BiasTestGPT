@@ -34,11 +34,9 @@ def genChatGPT(kwd_pair, count, example_shots, temperature=0.8):
   
   # https://github.com/openai/openai-cookbook/blob/main/examples/How_to_handle_rate_limits.ipynb
   @backoff.on_exception(backoff.expo, (openai.error.RateLimitError, 
+                                       openai.error.APIError,
                                     ConnectionResetError,
-                                    json.decoder.JSONDecodeError))#,
-                                    #max_time=300,
-                                    #raise_on_giveup=False,
-                                    #giveup=fatal_code)
+                                    json.decoder.JSONDecodeError))
   
   def completions_with_backoff(**kwargs):
     return openai.ChatCompletion.create(**kwargs)
@@ -59,7 +57,6 @@ def genChatGPT(kwd_pair, count, example_shots, temperature=0.8):
     if len(fnd_kwd_0)>0 and len(fnd_kwd_1)>0:
       #resp.append([kwd_pair[0], kwd_pair[1], sentence])
       resp.append({'sentence': sentence, 'group_term': kwd_pair[0], 'attribute_term': kwd_pair[1]})
-
 
     tries += 1
 
