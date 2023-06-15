@@ -12,11 +12,11 @@ The repository contains the BiasTestGPT framework which uses ChatGPT controllabl
 * [Datasheet for Datasets](https://github.com/Kaminari84/BiasTestGPT/blob/main/documents/BiasTestGPT___Datasheet_for_dataset_template.pdf) - description of the dataset collection process, preprocessing steps, intended uses as well as maintenance plan as suggested by [Gebru'21](https://arxiv.org/pdf/1803.09010.pdf).
 
 ## Quick Evaluation 
-* Run **bootstrapping_bias_test.ipynb** to reproduce bias estimation heatmap from the paper
-* Run **ataset_quality_stats.ipynb** to reproduce dataset quality evaluation (compolexity, diversity, sentiment, toxicity, readability)
+* Run **[bootstrapping_bias_test.ipynb][bootstrapping_bias_test.ipynb]** to reproduce bias estimation heatmap from the paper
+* Run **[dataset_quality_stats.ipynb][dataset_quality_stats.ipynb]** to reproduce dataset quality evaluation (compolexity, diversity, sentiment, toxicity, readability)
 
 ## BiasTestGPT Generation Framework Steps
-Steps of the framewrok. One reasons for splitting the generation into multile steps with separate scripts is to allow for easy inspection of generated sentences. Modular architecture also support improvemeny of some steps with better techniques (e.g., a better approach of turning sentences into templates).
+Steps of the framework. One reasons for splitting the generation into multile steps with separate scripts is to allow for easy inspection of generated sentences. Modular architecture also support improvemeny of some steps with better techniques (e.g., a better approach of turning sentences into templates).
 
 #### Step 1: Generating Test Sentences Using Provided Bias Specification
 Generation of test sentences using a generator PLM. The framework accepts OpenAI models such as "gpt-3.5-turbo" or "gpt-4". If OpenAI model is used <OPENAI-TOKEN> needs to be provided as input argument by the user. Th genration script also support any generative PLMs hosted on HuggingFace, such as: "gpt-j-6b" or "gpt-neo-2.7B". Generation requires a bias specification in JSON format on input, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification.
