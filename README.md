@@ -11,6 +11,9 @@ The repository contains the BiasTestGPT framework which uses ChatGPT controllabl
 * [Live Bias Specification Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_biases) - dataset with bias specifications for *`core_biases`* and *`custom_biases`*. It also constantly grows with new custom bias specification being added based on user interactions with the **HuggingFace tool**.
 * [Datasheet for Datasets](https://github.com/Kaminari84/BiasTestGPT/blob/main/documents/BiasTestGPT___Datasheet_for_dataset_template.pdf) - description of the dataset collection process, preprocessing steps, intended uses as well as maintenance plan as suggested by [Gebru'21](https://arxiv.org/pdf/1803.09010.pdf).
 
+## Quick Evaluation 
+* Run **bootstrapping_bias_test.ipynb** to reproduce bias estimation heatmap from the paper
+* Run **ataset_quality_stats.ipynb** to reproduce dataset quality evaluation (compolexity, diversity, sentiment, toxicity, readability)
 
 ## BiasTestGPT Generation Framework Steps
 Steps of the framewrok. One reasons for splitting the generation into multile steps with separate scripts is to allow for easy inspection of generated sentences. Modular architecture also support improvemeny of some steps with better techniques (e.g., a better approach of turning sentences into templates).
@@ -50,6 +53,7 @@ We provide a Jupyter Notebook script - *"bootstrapping_bias_test.ipynb"* -  that
 + **_3_csv2pairs.py** - converts csv sentences (*./gen_csv*) into *stereotype/anti-stereotype pairs* (*./gen_pairs_csv*) needed for applying the Stereotype Score from [Nadeem'20](https://arxiv.org/abs/2004.09456)
 + **_4_ss_test.py** - calculates the Steretype Score as a proportion of steteoryped choices based on templates with to alternatives as in *./gen_pairs_csv*. The score is exported into json format (*./ss_gen_test*). For each tested model name a new directory is created.
 + **bootstrapping_bias_test.ipynb** - Jupyter Notebook script for 30x bootstrapping the bias estimates and statistical testing agains the Manual Templates.
++ **dataset_quality_stats.ipynb** - Jupyter Notebook script with evaluation of quality metrics for the generated dataset.
 + **genChatGPT.py** - manager for connection to OpenAI API for requesting generations (used internally by *_1_gen_test_sentences.py*)
 + **./dataset_core_biases/bias_specs_with_glove_and_thesaurus.json** - specification of **core biases** in JSON format containg individual biases defined by social group and attribute terms. Templates are from prior work and replaced by our generations in AutoBiasTest. Additional social grup terms ("social_groups_glove", "social_groups_thesaurus') and attribute terms ("attributes_glove", "attributes_thesaurus") are semantically similar terms generated using Glove embeddings and Merridiam-Webster Thesaurus respectively. These are used for robustness testing.
 + **./dataset_custom_biases/custom_biases_spec.json** - specification of **custom biases** in the same JSON format as for core biases. These biases, however, have not been formalized in prior work.
