@@ -6,14 +6,14 @@ The repository contains the BiasTestGPT framework which uses ChatGPT controllabl
 ![BiasTestGPT Framework and Properties of the Generated Dataset](documents/main_architecture_props.png "BiasTestGPT Framework and Properties of the Generated Dataset")
 
 ## Links to Important Resources
-* [HuggingFace BiasTestGPT tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) - Interactive end-user bias testing tool build on top of BiasTestGPT framework. We encourage the use of the tool to test the framework in a user-friendly way. We are constantly adding new functionalities to this tool and improving its usability.
-* [Live Test Sentence Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_sentences) - live  and growing dataset of sentences for social bias testing. The dataset is linked to the **HuggingFace tool** and constantly grows based on user interactions. When user enteres new bias specification to test, the generated test sentences are added.
+* [HuggingFace BiasTestGPT tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt-pairs) - Interactive end-user bias testing tool build on top of BiasTestGPT framework. We encourage the use of the tool to test the framework in a user-friendly way. We are constantly adding new functionalities to this tool and improving its usability.
+* [Live Test Sentence Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_sentences4) - live  and growing dataset of sentences for social bias testing. The dataset is linked to the **HuggingFace tool** and constantly grows based on user interactions. When user enteres new bias specification to test, the generated test sentences are added.
 * [Live Bias Specification Dataset on HuggingFace](https://huggingface.co/datasets/RKocielnik/bias_test_gpt_biases) - dataset with bias specifications for *`core_biases`* and *`custom_biases`*. It also constantly grows with new custom bias specification being added based on user interactions with the **HuggingFace tool**.
 * [Datasheet for Datasets](https://github.com/Kaminari84/BiasTestGPT/blob/main/documents/BiasTestGPT___Datasheet_for_dataset_template.pdf) - description of the dataset collection process, preprocessing steps, intended uses as well as maintenance plan as suggested by [Gebru'21](https://arxiv.org/pdf/1803.09010.pdf).
 
 ## Quick Evaluation 
 * Run **bootstrapping_bias_test.ipynb** to reproduce bias estimation heatmap from the paper
-* Run **dataset_quality_stats.ipynb** to reproduce dataset quality evaluation (compolexity, diversity, sentiment, toxicity, readability)
+* Run **dataset_quality_stats.ipynb** to reproduce dataset quality evaluation (complexity, diversity, sentiment, toxicity, readability)
 
 ## BiasTestGPT Generation Framework Steps
 Steps of the framework. One reasons for splitting the generation into multile steps with separate scripts is to allow for easy inspection of generated sentences. Modular architecture also support improvemeny of some steps with better techniques (e.g., a better approach of turning sentences into templates).
@@ -22,25 +22,25 @@ Steps of the framework. One reasons for splitting the generation into multile st
 Generation of test sentences using a generator PLM. The framework accepts OpenAI models such as "gpt-3.5-turbo" or "gpt-4". If OpenAI model is used <OPENAI-TOKEN> needs to be provided as input argument by the user. Th genration script also support any generative PLMs hosted on HuggingFace, such as: "gpt-j-6b" or "gpt-neo-2.7B". Generation requires a bias specification in JSON format on input, please refer to **./custom_biases/custom_biases_spec.json** for an example of such specification.
 
 ```
-python3 _1_gen_test_sentences.py --bias_spec_json ./custom_biases/custom_biases_spec.json --generator_model 'gpt-3.5-turbo' --out_path './custom_biases/gen_json' --openai_token <OPENAI-TOKEN>
+python3 _1_gen_test_sentences.py --bias_spec_json ./dataset_custom_biases/custom_biases_spec.json --generator_model 'gpt-3.5-turbo' --out_path './dataset_custom_biases/gen_json' --openai_token <OPENAI-TOKEN>
 ```
 
 #### Step 2: Turn JSON generations into CSV for potential inspection of generated sentences
 Starting from generations in JSON format (see example in **/core_biases/gen_json/**), this step generates a CSV version of the generated sentences along with additional columns for potential human annotation - *`Discarded'* and *`Reason for discard'*. The script will process all .json files in a given directory.
 ```
-python3 _2_gen2csv.py --source_path ./custom_biases/gen_json --out_path ./custom_biases/gen_csv 
+python3 _2_gen2csv.py --source_path ./dataset_custom_biases/gen_json --out_path ./dataset_custom_biases/gen_csv 
 ```
 
 #### Step 3: Turn CSV templates into stereotype/anti-stereotype pairs
 This step turns the csv template sentence output from previous step into stereotype/anti-stereotype pairs. It also preserves any human annotation.
 ```
-python3 _3_csv2pairs_rule.py --source_path ./custom_biases/gen_csv --bias_spec_json ./custom_biases/custom_biases_spec.json --out_path ./custom_biases/gen_pairs_csv
+python3 _3_csv2pairs_rule.py --source_path ./dataset_custom_biases/gen_csv --bias_spec_json ./dataset_custom_biases/custom_biases_spec.json --out_path ./dataset_custom_biases/gen_pairs_csv
 ```
 
 #### Step 4: Test Social Bias on given **Tested Model** using Stereotype Score metric from [Nadeem'20](https://arxiv.org/abs/2004.09456) (the framework currently uses this metric, but can support various metrics from [Delobelle'22](https://repository.uantwerpen.be/docman/irua/8868d3/192219.pdf))
 The tested model accepts paths from HuggingFace Transformer library, examples: *"bert-base-uncased", "bert-large-uncased", "gpt2", "gpt2-medium", "gpt2-large", "gpt2-xl"*. We note that the bias tests on individual generations can be misleading, therefore we suggest an additional bootstrapping step described later.
 ```
-python3 _4_ss_test_rule.py --gen_pairs_path ./custom_biases/gen_pairs_csv --tested_model 'bert-base-uncased' --out_path ./custom_biases/gen_ss_test
+python3 _4_ss_test_rule.py --gen_pairs_path ./dataset_custom_biases/gen_pairs_csv --tested_model 'bert-base-uncased' --out_path ./dataset_custom_biases/gen_ss_test
 ```
 
 #### Step 5: Bootstrapping of Bias Test Results for Statistical Testing
@@ -108,6 +108,6 @@ The export JSON format in presented below:
 
 
 ## Dataset Composition
-Overview of the test sentence counts for different bias attributes, this includes only sentences with type column set to *'paper'*. Sentences of another type can be dynamically added to the dataset via [BiasTestGPT HuggingFace Tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt) and hence their counts will change.
+Overview of the test sentence counts for different bias attributes, this includes only sentences with type column set to *'paper'*. Sentences of another type can be dynamically added to the dataset via [BiasTestGPT HuggingFace Tool](https://huggingface.co/spaces/RKocielnik/bias-test-gpt-pairs) and hence their counts will change.
 
 ![Dataset Sentence Counts](documents/dataset_sentence_counts.png "Total counts of the sentences in the dataset")
